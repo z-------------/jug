@@ -2,9 +2,9 @@ const patOpen = /^<#jug$/i;
 const patClose = /^#>$/;
 
 function jug(doc) {
-    function print(text) { // used by scripts in the doc
+    function print(text, printIndentLevel = 0) { // used by scripts in the doc
         text.split("\n").forEach(line => {
-            outLines.push(" ".repeat(indentLevel) + line);
+            outLines.push(" ".repeat(indentLevel + printIndentLevel) + line);
         });
     }
 

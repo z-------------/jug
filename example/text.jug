@@ -1,0 +1,33 @@
+<#jug
+const charPairs = [
+    ["bill", "nick"],
+    ["francis", "ellis"],
+    ["louis", "coach"],
+    ["zoey", "rochelle"],
+];
+
+function cap(string) {
+    return string[0].toUpperCase() + string.substring(1);
+}
+
+function allPlayersMenu(args) {
+    for (let i = 0; i < charPairs.length; ++i) {
+        const [charFirst, charSecond] = charPairs[i];
+        print(
+`"${i + 3}"
+{
+    "command"   "scripted_user_func ${args[0]},${charFirst},${args.slice(2).join(",")}; scripted_user_func ${args[0]},${charSecond},${args.slice(2).join(",")}"
+    "label"     " ${cap(charFirst)}/${cap(charSecond)}"
+}`);
+    }
+}
+#>
+"ClientMenu"
+{
+    "Foo"
+    {
+        <#jug
+        allPlayersMenu(["give", null, "katana"]);
+        #>
+    }
+}

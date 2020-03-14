@@ -1,0 +1,12 @@
+{
+  "name": "jug",
+  "version": "0.0.0",
+  "main": "jug.js",
+  "bin": {
+    "jug": "./bin/cli.js"
+  },
+  "repository": "https://github.com/z-------------/jug.git",
+  "author": "Zack Guard <zacharyguard@gmail.com>",
+  "license": "MIT",
+  "private": true
+}

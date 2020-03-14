@@ -1,0 +1,26 @@
+"ClientMenu"
+{
+    "Foo"
+    {
+        "3"
+        {
+            "command"   "scripted_user_func give,bill,katana; scripted_user_func give,nick,katana"
+            "label"     " Bill/Nick"
+        }
+        "4"
+        {
+            "command"   "scripted_user_func give,francis,katana; scripted_user_func give,ellis,katana"
+            "label"     " Francis/Ellis"
+        }
+        "5"
+        {
+            "command"   "scripted_user_func give,louis,katana; scripted_user_func give,coach,katana"
+            "label"     " Louis/Coach"
+        }
+        "6"
+        {
+            "command"   "scripted_user_func give,zoey,katana; scripted_user_func give,rochelle,katana"
+            "label"     " Zoey/Rochelle"
+        }
+    }
+}

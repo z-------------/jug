@@ -3,6 +3,15 @@
 const jug = require("..");
 const path = require("path");
 const fsp = require("fs").promises;
+const { program } = require("commander");
+
+let filename;
+program
+    .version(require("../package.json").version)
+    .arguments("<filename>")
+    .action(_filename => filename = _filename)
+    .option("-v, --verbose", "enable logging output from Jug documents")
+    .parse(process.argv);
 
 function assert(condition, message) {
     if (!condition) {
@@ -12,12 +21,11 @@ function assert(condition, message) {
 }
 
 (async () => {
-    const filename = process.argv[2];
-    assert(filename, "No filename specified.");
-
     const filePath = path.join(process.cwd(), filename);
     const data = await fsp.readFile(filePath, "utf-8");
-    const processed = jug(data);
+    const processed = jug(data, {
+        verbose: program.verbose,
+    });
 
     process.stdout.write(processed);
 })();

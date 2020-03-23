@@ -13,6 +13,7 @@ function cap(string) {
 function allPlayersMenu(args) {
     for (let i = 0; i < charPairs.length; ++i) {
         const [charFirst, charSecond] = charPairs[i];
+        log(charFirst, charSecond);
         print(
 `"${i + 3}"
 {

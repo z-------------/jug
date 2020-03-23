@@ -1,29 +1,29 @@
+const docUtils = require("./src/docUtils");
+
 const patOpen = /^<#jug$/i;
 const patClose = /^#>$/;
 
-function jug(doc) {
-    function print(text, printIndentLevel = 0) { // used by scripts in the doc
-        text.split("\n").forEach(line => {
-            outLines.push(" ".repeat(indentLevel + printIndentLevel) + line);
-        });
-    }
-
+function jug(doc, config) {
     let isInBlock = false;
 
-    let indentLevel = 0;
-
+    const vars = {
+        indentLevel: 0,
+        outLines: [],
+    };
     const inLines = doc.split("\n");
-    const outLines = [];
     const scriptLines = [];
+
+    docUtils.init(vars, config);
+    const { print, log } = docUtils;
 
     for (const line of inLines) {
         const lineTrim = line.trim();
         if (!isInBlock) {
             if (lineTrim.match(patOpen)) {
                 isInBlock = true;
-                indentLevel = line.indexOf(lineTrim);
+                vars.indentLevel = line.indexOf(lineTrim);
             } else {
-                outLines.push(line);
+                vars.outLines.push(line);
             }
             continue;
         } else { // isInBlock == true
@@ -37,7 +37,7 @@ function jug(doc) {
         }
     }
 
-    return outLines.join("\n");
+    return vars.outLines.join("\n");
 }
 
 module.exports = jug;

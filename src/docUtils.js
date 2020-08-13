@@ -9,9 +9,20 @@ function init(_vars, _config) {
     config = _config;
 }
 
-function print(text, printIndentLevel = 0) {
-    text.split("\n").forEach(line => {
-        vars.outLines.push(" ".repeat(vars.indentLevel + printIndentLevel) + line);
+function put(text, printIndentLevel = 0) {
+    return print(text, printIndentLevel, false);
+}
+
+function print(text, printIndentLevel = 0, trailingNewline = true) {
+    const splits = text.split("\n");
+    splits.forEach(line => {
+        let piece = line;
+        if (!vars.blockFirstPrint) {
+            piece = " ".repeat(vars.indentLevel + printIndentLevel) + piece;
+        }
+        if (trailingNewline) piece += "\n";
+        vars.outs.push(piece);
+        vars.blockFirstPrint = false;
     });
 }
 
@@ -24,5 +35,6 @@ function log(...args) {
 module.exports = {
     init,
     print,
+    put,
     log,
 };

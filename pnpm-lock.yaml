@@ -1,5 +1,6 @@
 dependencies:
   commander: 5.0.0
+  pegjs: 0.10.0
 lockfileVersion: 5.1
 packages:
   /commander/5.0.0:
@@ -8,5 +9,13 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-JrDGPAKjMGSP1G0DUoaceEJ3DZgAfr/q6X7FVk4+U5KxUSKviYGM2k6zWkfyyBHy5rAtzgYJFa1ro2O9PtoxwQ==
+  /pegjs/0.10.0:
+    dev: false
+    engines:
+      node: '>=0.10'
+    hasBin: true
+    resolution:
+      integrity: sha1-z4uvrm7d/0tafvsYUmnqr0YQ3b0=
 specifiers:
   commander: ^5.0.0
+  pegjs: ^0.10.0

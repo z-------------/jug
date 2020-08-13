@@ -5,11 +5,15 @@
   "bin": {
     "jug": "./bin/cli.js"
   },
+  "scripts": {
+    "gen": "pegjs -o parser/parser.js parser/grammar.pegjs"
+  },
   "repository": "https://github.com/z-------------/jug.git",
   "author": "Zack Guard <zacharyguard@gmail.com>",
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "commander": "^5.0.0"
+    "commander": "^5.0.0",
+    "pegjs": "^0.10.0"
   }
 }

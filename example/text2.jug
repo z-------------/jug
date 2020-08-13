@@ -1,0 +1,12 @@
+hello, this is my <#jug put("co" + "ol") #> document.
+
+it has inliners, as well as:
+
+....
+    <#jug
+print("multi-liners");
+print("like");
+print("this one");
+#>
+
+pretty cool.

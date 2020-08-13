@@ -1,43 +1,42 @@
 const docUtils = require("./src/docUtils");
 
-const patOpen = /^<#jug$/i;
-const patClose = /^#>$/;
+const p = require("./parser/parser");
+
+const trailingWhitespacePat = /(\r|\t| )*$/;
 
 function jug(doc, config) {
-    let isInBlock = false;
-
     const vars = {
         indentLevel: 0,
-        outLines: [],
+        outs: [],
+        blockFirstPrint: true,
     };
-    const inLines = doc.split("\n");
-    const scriptLines = [];
 
     docUtils.init(vars, config);
-    const { print, log } = docUtils;
+    const { print, put, log } = docUtils;
 
-    for (const line of inLines) {
-        const lineTrim = line.trim();
-        if (!isInBlock) {
-            if (lineTrim.match(patOpen)) {
-                isInBlock = true;
-                vars.indentLevel = line.indexOf(lineTrim);
-            } else {
-                vars.outLines.push(line);
+    const parsed = p.parse(doc);
+    let prevText, prevItem;
+    for (const item of parsed) {
+        const [kind, text] = item;
+        if (kind === 0) { // plaintext
+            let textProcessed = text;
+            if (prevItem && prevItem[0] === 1 && text[0] === "\n") {
+                textProcessed = textProcessed.substring(1);
             }
-            continue;
-        } else { // isInBlock == true
-            if (lineTrim.match(patClose)) {
-                isInBlock = false;
-                eval(scriptLines.join("\n"));
-                scriptLines.length = 0;
-            } else {
-                scriptLines.push(line);
+            prevText = textProcessed;
+            vars.outs.push(textProcessed);
+        } else if (kind === 1) { // script
+            vars.blockFirstPrint = true;
+            if (prevText) {
+                const m = prevText.match(trailingWhitespacePat);
+                vars.indentLevel = m[0].length;
             }
+            eval(text);
         }
+        prevItem = item;
     }
 
-    return vars.outLines.join("\n");
+    return vars.outs.join("");
 }
 
 module.exports = jug;

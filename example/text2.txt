@@ -1,0 +1,10 @@
+hello, this is my cool document.
+
+it has inliners, as well as:
+
+....
+    multi-liners
+    like
+    this one
+
+pretty cool.

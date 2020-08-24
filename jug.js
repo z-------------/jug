@@ -23,6 +23,7 @@ function jug(doc, config) {
 
     docUtils.init(vars, config);
     const { print, put, log } = docUtils;
+    const include = docUtils.include.bind({ globalEval: eval });
 
     const parsed = p.parse(doc);
     let prevText, prevItem;

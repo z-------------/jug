@@ -1,0 +1,4 @@
+<#jug
+include("myinclude.js");
+print(double(3));
+#>
